@@ -1,1 +1,1 @@
-# Law-Firm-Project
+# Law Firm Django Project
