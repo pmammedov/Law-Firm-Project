@@ -1,0 +1,35 @@
+{% extends 'admin/mngmnt/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div  class="row ">
+            {% for p in object_list %}
+            <div class="col-4 m-2">
+                {% if p.user.avatar %}
+                <div style="
+                    background-image:url({{p.user.avatar.url}});
+                    width:100%;
+                    height:200px;
+                    background-position:center center;
+                    background-size: 100% auto;
+                    border-radius:10px; 
+                "></div>
+                {% endif  %}
+                <div class="my-2">
+                    <h4 style="
+                    display:flex;
+                    justify-content:space-between"><span>{{p.user.get_full_name}}</span><small>ZMK{{p.fee}}/mo</small></h4>
+                    <!-- <p>{{p.organisation}}</p> -->
+                    <p>{{p.organisation}}</p>
+                    <p>{{p.experience}}yrs experience</p>
+                    <a href="{{p.get_absolute_url}}" class="btn btn-success btn-md">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+ 
+    </div>
+
+
+{% endblock content %}

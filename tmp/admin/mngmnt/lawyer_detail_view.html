@@ -1,0 +1,120 @@
+{% extends 'admin/mngmnt/base.html' %}
+{% load crispy_forms_tags %}
+{% load ratings %}
+{% block title %}
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{object}}</h4>
+          <p class="card-description">
+            Viewing Profile
+          </p>
+          <div class="table-responsive">
+            {% if object.user.avatar %}
+                <div style="
+                    background-image:url({{object.user.avatar.url}});
+                    width:100%;
+                    height:250px;
+                    background-position:center center;
+                    background-size: 100% auto;
+                    border-radius:10px; 
+                "></div>
+            {% endif  %}
+            <div class="card-body">
+              <h4 class="card-title">{{object.user.get_full_name}}</h4>
+              <p class="card-description">{{object.organisation}}</p>
+              <ul class="list-ticked">
+                <li>ZMK {{object.fee}}/mo</li>
+                <li>{{object.experience}}<code>years</code> of experience</li>
+                <li>certified</li>
+                <li>{{object.get_rating}} rating</li>
+                <li>{{object.get_wins}} won cases</li>
+              </ul>
+              {% ratings object %}
+
+              <div class="template-demo d-flex flex-nowrap">
+                <a href="https://wa.me/{{object.user.phone}}" target="_blank" class="btn btn-success btn-icon-text">
+                  <i class="mdi mdi-whatsapp"></i>
+                  Chat Now
+                </a>
+                <button type="button" class="btn btn-inverse-danger btn-icon">
+                  <i class="ti-email"></i>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-6 col-12 card p-5" >
+    <div class="h4">Schedule Appointment</div>
+    <form action="/account/dashboard/lawyers/{{object.slug}}/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}          
+        <div id="div_id_subject" class="form-group"> 
+          <label for="id_subject" class=" requiredField">
+            Subject<span class="asteriskField">*</span> 
+          </label> 
+          <div> 
+            <input type="text" name="subject" maxlength="50" class="textinput form-control" required="" id="id_subject"> 
+          </div> 
+        </div> 
+        <div id="div_id_startTime" class="form-group"> 
+          <label class=" requiredField">
+            Starttime<span class="asteriskField">*</span> 
+          </label> 
+          <div class="d-flex"> 
+            <input type="date" name="startTime_0" class=" dateinput form-control" required="" id="id_startTime_0">
+            <input type="time" name="startTime_1" class="mx-2 timeinput form-control" required="" id="id_startTime_1"> 
+          </div> 
+        </div> 
+        <div id="div_id_endtTime" class="form-group"> 
+          <label class=" requiredField">
+            Endttime<span class="asteriskField">*</span> 
+          </label> 
+          <div class="d-flex"> 
+            <input type="date" name="endtTime_0" class="dateinput form-control" required="" id="id_endtTime_0">
+            <input type="time" name="endtTime_1" class="mx-2 timeinput form-control" required="" id="id_endtTime_1"> 
+          </div> 
+        </div>
+
+        <div id="div_id_startTime" class="form-group"> 
+          <label class=" requiredField">
+           Payment*
+          </label> 
+          <div> 
+            <select class="form-select" aria-label="Default select example">
+              <option selected> Mobile Money</option>
+              <option value="1">Airtel Money</option>
+              <option value="2">MTN Money</option>
+              <option value="3">ZAMTEL Money</option>
+            </select>
+          </div> 
+        </div> 
+        <div id="div_id_startTime" class="form-group"> 
+          <label class=" requiredField">
+            Mobile Acount Name<span class="asteriskField">*</span> 
+          </label> 
+          <div  > 
+            <input type="text" name="" value="{{object.user.get_full_name}}" maxlength="50" class=" form-control" required="" id="id_subject">   
+          </div> 
+        </div> 
+        <div id="div_id_startTime" class="form-group"> 
+          <label class=" requiredField">
+            Amount<span class="asteriskField">*</span>(ZMK) 
+          </label> 
+          <div  > 
+            <input type="text" name="" value="{{object.fee}}" maxlength="50" class=" form-control" required="" id="id_subject">   
+          </div> 
+        </div> 
+   
+          <button type="submit" class=" col-12 btn btn-primary text-light">Submit</button>
+
+      </form>
+</div>
+{% endblock %}

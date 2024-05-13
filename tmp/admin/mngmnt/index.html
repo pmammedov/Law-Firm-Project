@@ -1,0 +1,382 @@
+{% extends 'admin/mngmnt/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+
+  <div class="row">
+    <div class="col-lg-8 d-flex flex-column">
+ 
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded table-darkBGImg">
+            <div class="card-body">
+              <div class="col-sm-8">
+                <h3 class="text-white upgrade-info mb-0">
+                  Lawyer <span class="fw-bold">Up</span>
+                </h3>
+                <a href="{% url 'account:lawyer-list' %}" class="btn btn-info upgrade-btn">Get Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-between align-items-start">
+                <div>
+                  <h4 class="card-title card-title-dash">My Appointments</h4>
+                 <p class="card-subtitle card-subtitle-dash">{{user}} meetings</p>
+                </div>
+               
+              </div>
+              <div class="table-responsive  mt-1">
+                <table class="table select-table">
+                  <thead>
+                    <tr>
+                      <th>Lawyer</th>
+                      <th>Subject</th>
+                      <th>Time</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%  for appointment in apointments %}
+                    
+                    <tr>
+                       
+                      <td>
+                        <div class="d-flex ">
+                        {% if appointment.lawyer.user.avatar %}
+                        <img src="{{appointment.lawyer.user.avatar.url}}" alt="">
+                        {% endif  %}
+                          <div>
+                            <h6>{{appointment.lawyer}}</h6>
+                            <p>{{appointment.lawyer.organisation}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <h6>{{appointment.subject}}</h6>
+                      </td>
+                      <td>
+                        <h6>Start Time: {{appointment.startTime}}</h6>
+                        <p>End Time: {{appointment.startTime}}</p>
+                        <p>{{appointment.get_meeting_deration}} long</p>
+                        
+                      </td>
+                      <td><div class=" 
+                        
+                        {% if appointment.get_status == 'Completed' %}
+                        badge badge-opacity-success 
+                        {% endif %}
+    
+                        {%  if appointment.get_status == 'Progress'%}
+                        badge badge-opacity-info
+                        {% endif %}
+                       
+                        {%  if appointment.get_status == 'Pending'%}
+                        badge badge-opacity-warning
+                        {% endif %}
+    
+                        {%  if appointment.get_status == 'Waiting'%}
+                        badge badge-opacity-danger
+                        {% endif %}
+                        
+                        ">{{appointment.get_status}}</div></td>
+                    </tr>
+                    {%  endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-grow">
+        <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body card-rounded">
+              <h4 class="card-title  card-title-dash">Recent Events</h4>
+              <div class="list align-items-center border-bottom py-2">
+                <div class="wrapper w-100">
+                  <p class="mb-2 font-weight-medium">
+                    Change in Directors
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <i class="mdi mdi-calendar text-muted me-1"></i>
+                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list align-items-center border-bottom py-2">
+                <div class="wrapper w-100">
+                  <p class="mb-2 font-weight-medium">
+                    Other Events
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <i class="mdi mdi-calendar text-muted me-1"></i>
+                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list align-items-center border-bottom py-2">
+                <div class="wrapper w-100">
+                  <p class="mb-2 font-weight-medium">
+                    Quarterly Report
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <i class="mdi mdi-calendar text-muted me-1"></i>
+                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="list align-items-center border-bottom py-2">
+                <div class="wrapper w-100">
+                  <p class="mb-2 font-weight-medium">
+                    Change in Directors
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <i class="mdi mdi-calendar text-muted me-1"></i>
+                      <p class="mb-0 text-small text-muted">Mar 14, 2019</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="list align-items-center pt-3">
+                <div class="wrapper w-100">
+                  <p class="mb-0">
+                    <a href="#" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <h4 class="card-title card-title-dash">Activities</h4>
+                <p class="mb-0">20 finished, 5 remaining</p>
+              </div>
+              <ul class="bullet-line-list">
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Ben</span> assign you a task</div>
+                    <p>Just now</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Oliver</span> assign you a task</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">{{user}}</span> assign new appointment</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Lucas</span> assign you a task</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Henry</span> assign you a task</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Ben</span> assign you a task</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between">
+                    <div><span class="text-light-green">Ben</span> assign you a task</div>
+                    <p>1h</p>
+                  </div>
+                </li>
+              </ul>
+               
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 d-flex flex-column">
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title card-title-dash">Todo list</h4>
+                  </div>
+                  <div class="add-items d-flex mb-0">
+                    <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
+                    <button class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i class="mdi mdi-plus"></i></button>
+                  </div>
+                  <div class="list-wrapper">
+                    <ul class="todo-list todo-list-rounded">
+                      <li class="d-block">
+                        <div class="form-check w-100">
+                          <label class="form-check-label">
+                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                          <i class="input-helper"></i></label>
+                          <div class="d-flex mt-2">
+                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                            <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
+                            <i class="mdi mdi-flag ms-2 flag-color"></i>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="d-block">
+                        <div class="form-check w-100">
+                          <label class="form-check-label">
+                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                          <i class="input-helper"></i></label>
+                          <div class="d-flex mt-2">
+                            <div class="ps-4 text-small me-3">23 June 2020</div>
+                            <div class="badge badge-opacity-success me-3">Done</div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-check w-100">
+                          <label class="form-check-label">
+                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                          <i class="input-helper"></i></label>
+                          <div class="d-flex mt-2">
+                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                            <div class="badge badge-opacity-success me-3">Done</div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="border-bottom-0">
+                        <div class="form-check w-100">
+                          <label class="form-check-label">
+                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                          <i class="input-helper"></i></label>
+                          <div class="d-flex mt-2">
+                            <div class="ps-4 text-small me-3">24 June 2020</div>
+                            <div class="badge badge-opacity-danger me-3">Expired</div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title card-title-dash">Lawyer Type By Amount</h4>
+                  </div>
+                  <canvas class="my-auto chartjs-render-monitor" id="doughnutChart" height="448" width="672" style="display: block; width: 672px; height: 448px;"></canvas>
+                  <div id="doughnut-chart-legend" class="mt-5 text-center"><div class="chartjs-legend"><ul class="justify-content-center"><li><span style="background-color:#1F3BB3"></span>Total</li><li><span style="background-color:#FDD0C7"></span>Net</li><li><span style="background-color:#52CDFF"></span>Gross</li><li><span style="background-color:#81DADA"></span>AVG</li></ul></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <h4 class="card-title card-title-dash">Leave Report</h4>
+                    </div>
+                    <div>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Month Wise </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                          <h6 class="dropdown-header">week Wise</h6>
+                          <a class="dropdown-item" href="#">Year Wise</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="leaveReport" width="672" height="150" style="display: block; width: 672px; height: 150px;" class="chartjs-render-monitor"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <h4 class="card-title card-title-dash">Top Performer (Lawyer)</h4>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    {% for lawyer in lawyers_3 %}
+                    <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                      <div class="d-flex">
+                        {% if lawyer.user.avatar %}
+                        <img class="img-sm rounded-10" src="{{lawyer.user.avatar.url}}" alt="profile">
+                        {% endif %}
+                        <div class="wrapper ms-3">
+                          <p class="ms-1 mb-1 fw-bold">{{lawyer.user}}</p>
+                          <small class="text-muted mb-0">{{lawyer.organisation}}</small>
+                        </div>
+                      </div>
+                      <div class="text-muted text-small">
+                        1h ago
+                      </div>
+                    </div>
+                    {% endfor %}
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   
+{% endblock content %}
+
+
+

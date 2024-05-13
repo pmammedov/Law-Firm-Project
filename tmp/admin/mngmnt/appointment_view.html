@@ -1,0 +1,80 @@
+{% extends 'admin/mngmnt/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="card card-rounded">
+        <div class="card-body">
+          <div class="d-sm-flex justify-content-between align-items-start">
+            <div>
+              <h4 class="card-title card-title-dash">My Appointments</h4>
+             <p class="card-subtitle card-subtitle-dash">lawyer meetings set up</p>
+            </div>
+           
+          </div>
+          <div class="table-responsive  mt-1">
+            <table class="table select-table">
+              <thead>
+                <tr>
+                  <th>Lawyer</th>
+                  <th>Subject</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%  for appointment in apointments %}
+                
+                <tr>
+                   
+                  <td>
+                    <div class="d-flex ">
+                    {% if appointment.lawyer.user.avatar %}
+                    <img src="{{appointment.lawyer.user.avatar.url}}" alt="">
+                    {% endif  %}
+                      <div>
+                        <h6>{{appointment.lawyer}}</h6>
+                        <p>{{appointment.lawyer.organisation}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h6>{{appointment.subject}}</h6>
+                  </td>
+                  <td>
+                    <h6>Start Time: {{appointment.startTime}}</h6>
+                    <p>End Time: {{appointment.startTime}}</p>
+                    <p>{{appointment.get_meeting_deration}} long</p>
+                    
+                  </td>
+                  <td><div class=" 
+                    
+                    {% if appointment.get_status == 'Completed' %}
+                    badge badge-opacity-success 
+                    {% endif %}
+
+                    {%  if appointment.get_status == 'Progress'%}
+                    badge badge-opacity-info
+                    {% endif %}
+                   
+                    {%  if appointment.get_status == 'Pending'%}
+                    badge badge-opacity-warning
+                    {% endif %}
+
+                    {%  if appointment.get_status == 'Waiting'%}
+                    badge badge-opacity-danger
+                    {% endif %}
+                    
+                    ">{{appointment.get_status}}</div></td>
+                </tr>
+                {%  endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock content %}
