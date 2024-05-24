@@ -27,7 +27,7 @@
         {% endif %}
 
     {% endif %}
-		<div class="col-md-10 mx-auto  display-6 col my-3 px-0"><a href="#">LCMS</a> | Login</div>
+		<div class="col-md-10 mx-auto  display-6 col my-3 px-0"><a href="{% url 'home' %}">LCMS</a> | Login</div>
         <form class="col-md-10 mx-auto card p-3" method="post" action="{{form.get_absolute_url}}">
             <div class="col-auto mx-0 px-0">
                 <table>

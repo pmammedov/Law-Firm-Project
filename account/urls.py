@@ -14,3 +14,6 @@ urlpatterns = [
     path("dashboard/edit/", UserEditCreateView.as_view(),name="edit"),
     
 ]
+
+ 
+   

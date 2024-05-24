@@ -40,4 +40,3 @@ class ApointmentAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     list_display = ( 'lwyr','usr','rate', 'updated', )
     search_fields = ('rate','updated', ) 
-

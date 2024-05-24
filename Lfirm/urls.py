@@ -7,10 +7,10 @@ from django.urls import path,include
 from blog.views import *
 
 urlpatterns = [
-    # path("",HomeScreen.as_view( template_name='blog/home.html' ) ,name='home'),
-    # path("blog/",include('blog.urls')),
+    path("",HomeScreen.as_view( template_name='blog/home.html' ) ,name='home'),
+    path("blog/",include('blog.urls')),
     path("admin/", admin.site.urls),
-    # path("contact/",ContactFunc,name = 'contact'),
+    path("contact/",ContactFunc,name = 'contact'),
     path("account/",include('account.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
