@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
+from django.urls import reverse_lazy
 from django.views.generic import View
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import login , logout
-from django.views.generic import ListView , DetailView ,View,TemplateView
+from django.views.generic import ListView , DetailView ,View,TemplateView, DeleteView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import User
 from .userForms import ApointmentForm, SignUpForm, UserEditForm
@@ -118,7 +119,24 @@ class ApointmentListView(ListView):
         context = super().get_context_data(*args,**kwargs)
         context['apointments'] = Apointment.objects.filter(client=self.request.user)        
         return context
+    
+    # def post(self, request, *args, **kwargs):
+    #     appointment_id = request.POST.get('id')
+    #     if appointment_id:
+    #         appointment = Apointment.objects.filter(appointment_id=appointment_id, client=self.request.user).first()
+    #         if appointment:
+    #             appointment.delete()
+    #     return redirect('account:apointment')
 
-  
+class AppointmentDeleteView(DeleteView):
+    model = Apointment
+    success_url = reverse_lazy('account:apointment')
+    template_name = "admin/mngmnt/appointment_view.html"  # Optional if you need a confirmation page
 
-  
+    def get_queryset(self):
+        return Apointment.objects.filter(client=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.success_url)

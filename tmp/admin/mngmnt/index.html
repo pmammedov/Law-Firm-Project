@@ -41,6 +41,7 @@
                       <th>Subject</th>
                       <th>Time</th>
                       <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -86,7 +87,9 @@
                         badge badge-opacity-danger
                         {% endif %}
                         
-                        ">{{appointment.get_status}}</div></td>
+                        ">{{appointment.get_status}}</div>
+                      </td>
+                    <td>delete</td>
                     </tr>
                     {%  endfor %}
                   </tbody>
