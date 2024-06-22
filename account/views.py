@@ -140,8 +140,3 @@ class AppointmentDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect(self.success_url)
-    
-    
-def appointment_detail(request):
-    # appointment = get_object_or_404(Apointment, pk=pk)
-    return render(request, 'admin/mngmnt/appointment_detail.html')
