@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/contact.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/contact_responsive.css' %}">
+{% endblock meta %}
+
+{% block title %}
+Contact
+{% endblock title %}
+
+
+
+
+
+
+{% block body %}
+<div style="height:90px;width:100%;background-color:black"></div>
+ 
+	<!-- Home -->
+
+ 
+	<div class="my-5 container">
+			
+		<div class="row py-4">
+			<div class="col-md-6 col-12">
+				<div class="h4">About Us</div>
+				<p>
+					Welcome to Law Consultation Managament System, the premier legal software platform designed to simplify and streamline the consultation process for lawyers and law firms.
+					Our team is made up of experienced lawyers and software developers who understand the needs and challenges of the legal industry. Our goal is to create innovative solutions that make it easier for lawyers to manage their practice and provide high-quality legal services to their clients.
+					With Law Consultation Managament System, lawyers can enjoy a range of features that help them stay organized and efficient, including:
+				</p>
+				
+				<ul>
+					<li>
+						- A secure client portal for communication and document sharing
+					</li>
+					<li>
+						- Automated appointment scheduling and reminders
+					</li>
+					<li>
+						- Billing and invoicing capabilities
+					</li>
+					<li>
+						- Access to a comprehensive knowledge base of legal resources
+					</li>
+					<li>
+						- Robust reporting and analytics to track performance and identify areas for improvement
+					</li>
+				</ul>
+
+				<p>
+					At Law Consultation Managament System, we believe that technology can help lawyers work smarter, not harder. Our platform is designed to save you time and increase your productivity, so you can focus on what really matters - providing exceptional legal services to your clients.
+				</p>
+				<p>
+					Thank you for choosing Law Consultation Managament System as your partner in legal management. We look forward to helping you achieve success and growth in your practice.
+				</p>
+				
+			</div>
+			<div class="col-6 ">
+				<img class="col" src="{% static '1.jpg' %}" alt="" />
+ 			</div>
+		</div>
+
+		<div class="row mb-5">
+			<div class="col">
+				<img class="col" src="{% static '2.jpg' %}" alt="" />
+			</div>
+
+			<div class="col-md-5 py-5">
+				<div class="h4">Core Principals</div>
+				<ol>
+					<li>
+						Providing expert legal advice: One of the primary principles of a law consultation firm is to provide expert legal advice to their clients. This advice should be based on a thorough understanding of the law and should take into account the specific needs and circumstances of the client.
+					</li>
+					<li>
+						Maintaining ethical standards: Another important principle is maintaining ethical standards in all aspects of their work. This includes maintaining client confidentiality, avoiding conflicts of interest, and ensuring that their advice is always in the best interest of the client.
+					</li>
+					<li>
+						Building strong relationships with clients: A law consultation firm should strive to build strong and lasting relationships with their clients. This can be achieved by providing excellent service, being responsive to client needs, and maintaining open and clear lines of communication.
+					</li>
+				</ol>
+			</div>
+		</div>
+				
+	</div>
+	 
+{% endblock body %}
+
+
+{% block js %}
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock js %}
+
+
+
+ 
+
+ 
+
+
+

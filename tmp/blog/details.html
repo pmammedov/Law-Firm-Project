@@ -51,20 +51,20 @@
 						<!-- Post Body -->
 
 						<div class="">
-                            <p class="post_p">{{object.intro }}</p>
-                            <img src="{{object.thumb.url}}" alt="" style="width:100%">
-							<p class="post_p">{{object.body | safe }}</p>
-							<p class="post_p">{{object.body | safe }}</p>
-							<p class="post_p">{{object.v_link | safe }}</p>
-							<p class="post_p">{{object.m_link | safe }}</p>
-							<p class="post_p">{{object.s_link | safe }}</p>
+                            <p class="post_p">{{article.intro }}</p>
+                            <img src="{{article.thumb.url}}" alt="" style="width:100%">
+							<p class="post_p">{{article.body | safe }}</p>
+							<p class="post_p">{{article.body | safe }}</p>
+							<p class="post_p">{{article.v_link | safe }}</p>
+							<p class="post_p">{{article.m_link | safe }}</p>
+							<p class="post_p">{{article.s_link | safe }}</p>
 
 						
 
 							<!-- Post Tags -->
 							<div class="post_tags">
 								<ul>
-                                    {% for t in object.tags.all  %}
+                                    {% for t in article.tags.all  %}
 									    <li class="post_tag"><a href="#">{{t.name}}</a></li>
                                     {% endfor %}
 								</ul>
@@ -73,7 +73,7 @@
 						
 						<!-- Bottom Panel -->
 						<div class="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
-							<div class="post_meta"><a href="#">{{object.author}}</a><span>{{object.date_modified}}</span></div>
+							<div class="post_meta"><a href="#">{{article.author}}</a><span>{{object.date_modified}}</span></div>
 							<div class="post_share ml-sm-auto">
 								<span>share</span>
 								<ul class="post_share_list">
@@ -91,7 +91,7 @@
 								<!-- Small Card With Image -->
 								{% if rel %}
 								{% for r in rel %}
-								{% if r.id != object.id %}
+								{% if r.id != article.id %}
 								<div class="card card_small_with_image grid-item">
 									<img class="card-img-top" src="{{r.cover_img.url}}" >
 									<div class="card-body">

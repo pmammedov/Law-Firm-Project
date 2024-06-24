@@ -224,39 +224,39 @@
 
             </div>
           </div>
-            <div class="card card-rounded ms-4">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                      <div>
-                        <h4 class="card-title card-title-dash">Top Performer (Lawyer)</h4>
-                      </div>
+          <div class="card card-rounded ms-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <h4 class="card-title card-title-dash">Top Performer (Lawyer)</h4>
                     </div>
-                    <div class="mt-3">
-                      {% for lawyer in lawyers_3 %}
-                      <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
-                        <div class="d-flex">
-                          {% if lawyer.user.avatar %}
-                          <img class="img-sm rounded-10" src="{{lawyer.user.avatar.url}}" alt="profile">
-                          {% endif %}
-                          <div class="wrapper ms-3">
-                            <p class="ms-1 mb-1 fw-bold">{{lawyer.user}}</p>
-                            <small class="text-muted mb-0">{{lawyer.organisation}}</small>
-                          </div>
-                        </div>
-                        <div class="text-muted text-small">
-                          1h ago
+                  </div>
+                  <div class="mt-3">
+                    {% for lawyer in lawyers_3 %}
+                    <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                      <div class="d-flex">
+                        {% if lawyer.user.avatar %}
+                        <img class="img-sm rounded-10" src="{{lawyer.user.avatar.url}}" alt="profile">
+                        {% endif %}
+                        <div class="wrapper ms-3">
+                          <p class="ms-1 mb-1 fw-bold">{{lawyer.user}}</p>
+                          <small class="text-muted mb-0">{{lawyer.organisation}}</small>
                         </div>
                       </div>
-                      {% endfor %}
-  
+                      <div class="text-muted text-small">
+                        1h ago
+                      </div>
                     </div>
+                    {% endfor %}
+
                   </div>
                 </div>
               </div>
             </div>
-          
+          </div>
+
         </div>
       </div>
     </div>
@@ -270,65 +270,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <h4 class="card-title card-title-dash">Todo list</h4>
                   </div>
-                  <div class="add-items d-flex mb-0">
-                    <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                    <button
-                      class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i
-                        class="mdi mdi-plus"></i></button>
-                  </div>
-                  <div class="list-wrapper">
-                    <ul class="todo-list todo-list-rounded">
-                      <li class="d-block">
-                        <div class="form-check w-100">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i
-                              class="input-helper rounded"></i>
-                            <i class="input-helper"></i></label>
-                          <div class="d-flex mt-2">
-                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                            <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
-                            <i class="mdi mdi-flag ms-2 flag-color"></i>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="d-block">
-                        <div class="form-check w-100">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i
-                              class="input-helper rounded"></i>
-                            <i class="input-helper"></i></label>
-                          <div class="d-flex mt-2">
-                            <div class="ps-4 text-small me-3">23 June 2020</div>
-                            <div class="badge badge-opacity-success me-3">Done</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="form-check w-100">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i
-                              class="input-helper rounded"></i>
-                            <i class="input-helper"></i></label>
-                          <div class="d-flex mt-2">
-                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                            <div class="badge badge-opacity-success me-3">Done</div>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="border-bottom-0">
-                        <div class="form-check w-100">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i
-                              class="input-helper rounded"></i>
-                            <i class="input-helper"></i></label>
-                          <div class="d-flex mt-2">
-                            <div class="ps-4 text-small me-3">24 June 2020</div>
-                            <div class="badge badge-opacity-danger me-3">Expired</div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -352,54 +294,14 @@
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="card-title card-title-dash">Lawyer Type By Amount</h4>
                   </div>
-                  <canvas class="my-auto chartjs-render-monitor" id="doughnutChart" height="448" width="672"
-                    style="display: block; width: 672px; height: 448px;"></canvas>
-                  <div id="doughnut-chart-legend" class="mt-5 text-center">
-                    <div class="chartjs-legend">
-                      <ul class="justify-content-center">
-                        <li><span style="background-color:#1F3BB3"></span>Total</li>
-                        <li><span style="background-color:#FDD0C7"></span>Net</li>
-                        <li><span style="background-color:#52CDFF"></span>Gross</li>
-                        <li><span style="background-color:#81DADA"></span>AVG</li>
-                      </ul>
-                    </div>
-                  </div>
+
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
-      </div>
-      <div class="row flex-grow">
-        <!-- <div class="col-12 grid-margin stretch-card">
-          <div class="card card-rounded">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                      <h4 class="card-title card-title-dash">Leave Report</h4>
-                    </div>
-                    <div>
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle toggle-dark btn-lg mb-0 me-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Month Wise </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                          <h6 class="dropdown-header">week Wise</h6>
-                          <a class="dropdown-item" href="#">Year Wise</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-3"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="leaveReport" width="672" height="150" style="display: block; width: 672px; height: 150px;" class="chartjs-render-monitor"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-       
+
       </div>
     </div>
   </div>

@@ -117,7 +117,8 @@ class ApointmentListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args,**kwargs)
-        context['apointments'] = Apointment.objects.filter(client=self.request.user)        
+        context['apointments'] = Apointment.objects.filter(client=self.request.user)
+        print(context['apointments'])  # Debug statement to check the queryset
         return context
     
     # def post(self, request, *args, **kwargs):

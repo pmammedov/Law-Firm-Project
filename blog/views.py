@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render,redirect
 from django.views.generic import ListView , DetailView ,View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView 
@@ -44,6 +45,23 @@ class BlogListView(ListView):
 		context["cat"] = cat
 		context['data'] = data
 		return context
+
+class BlogListView(ListView):
+    model = Article
+    template_name = 'admin/mngmnt/appointment_detail.html'
+    context_object_name = 'blog'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['blog'] = Article.objects.all()
+        return context
+
+class BlogDetailView(DetailView):
+	model = Article
+	template_name = 'blog/details.html'
+	context_object_name = 'article'
+
+
 
 class postDetails(DetailView): 
 	model = Article
