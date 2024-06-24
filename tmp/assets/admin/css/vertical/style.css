@@ -1,9 +1,4 @@
-/*------------------------------------------------------------------
- [Master Stylesheet]
 
-  Project:	Star Admin2 
-  Version:	1.2.1
--------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
   ===== Table of Contents =====
 
@@ -28897,7 +28892,7 @@ div.tagsinput span.tag a {
 
 @media (max-width: 991px) {
   .navbar .navbar-menu-wrapper {
-    width: calc(100% - 55px);
+    width: calc(100% - 90px);
     padding-top: 12px;
     padding-left: 15px;
     padding-right: 11px;
