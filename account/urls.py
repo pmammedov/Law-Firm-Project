@@ -15,6 +15,8 @@ urlpatterns = [
     path("dashboard/lawyers/<str:slug>/", LawyerDetailView.as_view(),name="lawyer-details"),
     path("dashboard/edit/", UserEditCreateView.as_view(),name="edit"),
     path("appointment_detail/", appointment_detail , name="appointment_detail"),
+    path('top-performers/', TopPerformersView.as_view(), name='top-performers'),
+
 
     
 ]

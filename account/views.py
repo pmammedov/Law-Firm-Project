@@ -14,6 +14,11 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import User
 from .userForms import ApointmentForm, SignUpForm, UserEditForm
 from .models import *
+from django.db.models import Count
+from django.db.models import Count
+from .models import Lawywer
+
+
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -141,7 +146,19 @@ class AppointmentDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect(self.success_url)
+
+class TopPerformersView(ListView):
+    model = Lawywer
+    template_name = 'admin/mngmnt/index.html'  # Update with your actual template path
+    context_object_name = 'lawyers_3'
+    paginate_by = 10  # Adjust as needed
+
+    def get_queryset(self):
+        return Lawywer.objects.annotate(
+            num_appointments=Count('appointments')
+        ).order_by('-num_appointments')[:3]
     
+
 def appointment_detail(request):
     # appointment = get_object_or_404(Apointment, pk=pk)
     return render(request, 'admin/mngmnt/appointment_detail.html')

@@ -43,7 +43,7 @@
 <div class="row flex-row flex-wrap gap-3">
     {% for article in blog %}
     <div class="card p-0" style="width: 18rem;">
-        <img src="https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/03/what-is-a-blog-1.webp"
+        <img src="{{article.thumb.url}}"
             class="card-img-top w-100 rounded-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ article.title }}</h5>

@@ -46,7 +46,7 @@ class BlogListView(ListView):
 		context['data'] = data
 		return context
 
-class BlogListView(ListView):
+class BackBlogListView(ListView):
     model = Article
     template_name = 'admin/mngmnt/appointment_detail.html'
     context_object_name = 'blog'
@@ -61,6 +61,11 @@ class BlogDetailView(DetailView):
 	template_name = 'blog/details.html'
 	context_object_name = 'article'
 
+
+class ArticleList(ListView):
+	model = Article
+	template_name = 'blog/article_list.html'
+	context_object_name = 'object'
 
 
 class postDetails(DetailView): 
