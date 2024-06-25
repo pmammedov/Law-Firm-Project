@@ -40,10 +40,10 @@
     <p>To get a local copy up and running follow these simple steps:</p>
     <ol>
         <li><strong>Clone the repository:</strong>
-            <pre><code>git clone https://github.com/your-username/law-firm-management-system.git</code></pre>
+            <pre><code>git clone git@github.com:pmammedov/Law-Firm-Project.git</code></pre>
         </li>
         <li><strong>Navigate to the project directory:</strong>
-            <pre><code>cd law-firm-management-system</code></pre>
+            <pre><code>cd Law-Firm-Project</code></pre>
         </li>
         <li><strong>Create a virtual environment:</strong>
             <pre><code>python -m venv env</code></pre>
