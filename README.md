@@ -87,6 +87,6 @@
         <li>Access the admin panel to manage blogs, appointments, and lawyer profiles through the CRUD interface.</li>
     </ol>
     <h2>Contact</h2>
-    <p>Perman - <a href="mailto:pmammedov@gmail.com">your-email@example.com</a></p>
+    <p><a href="mailto:pmammedov@gmail.com">MailToMe</a></p>
     <p>Thank you for visiting! If you find this project helpful, please give it a star 🌟.</p>
 </body>
