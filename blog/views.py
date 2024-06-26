@@ -142,6 +142,13 @@ class SearchProduct(ListView):
 		context["cat"] = cat
 		# context['data'] = data
 		return context
-	
- 
- 
+
+def create_blog(request):
+	if request.method == 'POST':
+		form = PostForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('blog:blog_list')
+	else:
+		form = PostForm()
+	return render(request, 'admin/mngmnt/appointment_detail.html', {'form': form})
