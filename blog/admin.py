@@ -2,17 +2,11 @@ from django.contrib import admin
 
 from .models import  *
 
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title','l_updated', )
-    search_fields = ('title', ) 
- 
  
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','active', 'author','l_updated')
-    search_fields = ('title', 'body','intro') 
+    list_display = ('title','author','updated')
+    search_fields = ('title', 'body') 
   
     actions = ['activate' ,'deactivate' ]
        

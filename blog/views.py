@@ -1,5 +1,6 @@
 from typing import Any
 from django.shortcuts import render,redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView , DetailView ,View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView 
 from django.contrib.auth.models import Group 
@@ -25,10 +26,10 @@ class HomeScreen(ListView):
 	def get_context_data(self,*args, **kwargs):
 
 		context = super().get_context_data(**kwargs)
-		cat = Category.objects.all()
+		# cat = Category.objects.all()
 		data = Article.objects.all()
 
-		context["cat"] = cat
+		# context["cat"] = cat
 		context['data'] = data
 		return context
 
@@ -39,10 +40,10 @@ class BlogListView(ListView):
 
 	def get_context_data(self,*args, **kwargs):
 		context = super().get_context_data(**kwargs)
-		cat = Category.objects.all()
+		# cat = Category.objects.all()
 		data = Article.objects.all()
 
-		context["cat"] = cat
+		# context["cat"] = cat
 		context['data'] = data
 		return context
 
@@ -77,7 +78,6 @@ class postDetails(DetailView):
 		context = super().get_context_data(**kwargs)
 		frm =  self.form_class()
 		new = Article.objects.all()[:10]
-		cat = Category.objects.all()
 		post  = Article.objects.all()
 		related_query = ''
 
@@ -101,7 +101,6 @@ class postDetails(DetailView):
 				ref.append(related_query)
 		
 		context['r_post'] = ref		
-		context["cat"] = cat
 		context["frm"] = frm 
 		context["comm"] = self.get_object().comments.filter(active=True)
 		context["comm_all"] = self.get_object().comments.filter(active=True).count()
@@ -135,20 +134,53 @@ class SearchProduct(ListView):
 			object_list = self.model.objects.all()
 		return object_list 
 	
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		cat = Category.objects.all()
-		# data = Article.objects.all()
-		context["cat"] = cat
-		# context['data'] = data
-		return context
+	# def get_context_data(self, **kwargs):
+	# 	context = super().get_context_data(**kwargs)
+	# 	cat = Category.objects.all()
+	# 	# data = Article.objects.all()
+	# 	context["cat"] = cat
+	# 	# context['data'] = data
+	# 	return context
 
-def create_blog(request):
-	if request.method == 'POST':
-		form = PostForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return redirect('blog:blog_list')
-	else:
-		form = PostForm()
-	return render(request, 'admin/mngmnt/appointment_detail.html', {'form': form})
+# class BlogCreateView(CreateView):
+# 	model = Article
+# 	fields = ('title', 'thumb', 'body')
+# 	template_name = 'admin/mngmnt/appointment_detail.html'
+# 	success_url = '/blog_list/'
+
+
+# def create_article(request):
+#     if request.method == 'POST':
+#         form = ArticleForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('blog:blog_list')  # Replace with your redirect target
+#     else:
+#         form = ArticleForm()
+#     return render(request, 'blog/create_article.html', {'form': form})
+
+class CreateArticleView(CreateView):
+	model = Article
+	form_class = ArticleForm
+	template_name = 'blog/create_article.html'
+	success_url = reverse_lazy('blog:blog_list')
+
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
+
+	
+# class BlogDeleteView(DeleteView):
+# 	model = Article
+# 	template_name = 'admin/mngmnt/appointment_detail.html'
+# 	success_url = reverse_lazy('blog')
+
+class ArticleDeleteView(DeleteView):
+    model = Article
+    success_url = reverse_lazy('blog:blog_list')
+    template_name = "admin/mngmnt/appointment_detail.html"  # Optional if you need a confirmation page
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.success_url)

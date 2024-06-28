@@ -33,12 +33,12 @@ Blog | LCMS
 								{% for d in data %}
 								<!-- Small Card With Image -->
 								<div class="card card_small_with_image grid-item">
-									<img class="card-img-top" src="{{d.thumb.url}}" alt="">
+									<img class="card-img-top" src="{{d.image.url}}" alt="">
 									<div class="card-body">
 										<div class="card-title card-title-small"><a
-												href="{{d.get_absolute_url}}">{{d.snip}}</a></div>
+												href="#">{{d.snip}}</a></div>
 										<small class="post_meta"><a
-												href="#">{{d.author}}</a><span>{{d.l_updated}}</span></small>
+												href="#">{{d.author}}</a><span>{{d.updated}}</span></small>
 									</div>
 								</div>
 								{% endfor %}
@@ -115,11 +115,11 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="{{c.get_absolute_url}}">
+											<a href="#">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">
-														<div><img src="{{c.thumb.url}}" alt=""></div>
+														<div><img src="{{c.image.url}}" alt=""></div>
 													</div>
 													<div class="side_post_content">
 														<div class="side_post_title">{{c.title}}</div>
@@ -141,11 +141,11 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="{{c.get_absolute_url}}">
+											<a href="#">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">
-														<div><img src="{{c.thumb.url}}" alt=""></div>
+														<div><img src="{{c.image.url}}" alt=""></div>
 													</div>
 													<div class="side_post_content">
 														<div class="side_post_title">{{c.title}}</div>
@@ -165,11 +165,11 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="{{c.get_absolute_url}}">
+											<a href="#">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">
-														<div><img src="{{c.thumb.url}}" alt=""></div>
+														<div><img src="{{c.image.url}}" alt=""></div>
 													</div>
 													<div class="side_post_content">
 														<div class="side_post_title">{{c.title}}</div>

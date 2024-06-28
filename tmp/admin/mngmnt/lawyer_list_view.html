@@ -4,7 +4,14 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<a href="{% url 'account:create_lawyer' %}" type="button" class="btn btn-primary text-white ">
+    Create Lawyer
+</a>
+{% endif %}
     <div  class="row ">
+      
             {% for p in object_list %}
             <div class="col-4 m-2">
                 {% if p.user.avatar %}
@@ -24,12 +31,19 @@
                     <!-- <p>{{p.organisation}}</p> -->
                     <p>{{p.organisation}}</p>
                     <p>{{p.experience}}yrs experience</p>
-                    <a href="{{p.get_absolute_url}}" class="btn btn-success btn-md">View Details</a>
+                    <a href="{% url 'account:lawyer-details' p.pk %}" class="btn btn-success btn-md">View Details</a>
+                    <td>
+                        <form action="{% url 'account:delete-lawyer' p.pk %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger border-0" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</button>
+                  
+                        </form>
+                    </td>
                 </div>
             </div>
             {% endfor %}
  
     </div>
 
-
+    {% endif %}
 {% endblock content %}

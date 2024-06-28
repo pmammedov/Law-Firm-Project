@@ -12,7 +12,8 @@ from django.contrib.auth import login , logout
 from django.views.generic import ListView , DetailView ,View,TemplateView, DeleteView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import User
-from .userForms import ApointmentForm, SignUpForm, UserEditForm
+from .userForms import ApointmentForm, SignUpForm, UserEditForm, LawyerForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from django.db.models import Count
 from django.db.models import Count
@@ -58,29 +59,10 @@ class SignUpView(View):
         return render(request, self.template_name, {'form': form})
 
 class UserEditCreateView(CreateView):
-    template_name = 'admin/mngmnt/edit.html'
+    template_name = 'admin/mngmnt/create_user.html'
     models = User
     form_class = UserEditForm
-
-    def get(self, request, *args, **kwargs):
-        me = self.request.user
-        context = {
-            "form":self.form_class(instance=me),
-            "User":User.objects.get(id=me.id),
-        } 
-        return render(request,self.template_name,context)
-
-
-    def post(self, request, *args, **kwargs): 
-        me = self.request.user
-        forms = UserEditForm(self.request.POST,self.request.FILES,instance=me)
-        if forms.is_valid():
-            forms.save()
-            return redirect("account:admin")
- 
-        return render(request,self.template_name)
-
-
+    success_url = reverse_lazy('account:lawyer-list')
 
 class AdminView(TemplateView):
     template_name = "admin/mngmnt/index.html"
@@ -90,8 +72,19 @@ class AdminView(TemplateView):
         context['apointments'] = Apointment.objects.filter(client=self.request.user)        
         context['lawyers_3'] = Lawywer.objects.all()[:3]        
         return context
+    
+class CreateLawyerView(CreateView):
+    model = Lawywer
+    form_class = LawyerForm
+    template_name = "admin/mngmnt/create_lawyer.html"
+    success_url = reverse_lazy('account:lawyer-list')
 
-class LawyerListView(ListView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Create Lawyer'
+        return context
+
+class LawyerListView(LoginRequiredMixin, ListView):
     model = Lawywer
     template_name = "admin/mngmnt/lawyer_list_view.html"
 
@@ -99,6 +92,7 @@ class LawyerDetailView(DetailView):
     model = Lawywer
     form_class  = ApointmentForm
     template_name = "admin/mngmnt/lawyer_detail_view.html"
+    context_object_name = 'lawyer'
 
     def get_context_data(self, *args, **kwargs) :
         context = super().get_context_data(*args, **kwargs)
@@ -115,6 +109,11 @@ class LawyerDetailView(DetailView):
             instance.save()
             messages.success(self.request, ('You have successfully set an appointment with %s' %(self.get_object())))
         return redirect('account:lawyer-list')
+    
+class DeleteLawyerView(DeleteView):
+    model = Lawywer
+    template_name = "admin/mngmnt/lawyer_list_view.html"
+    success_url = reverse_lazy('account:lawyer-list')
 
 class ApointmentListView(ListView):
     model = Apointment

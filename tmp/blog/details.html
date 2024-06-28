@@ -17,9 +17,8 @@
 	<!-- Home -->
 
 	<div class="home" style="background-color: black;">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="{{object.thumb.url}}" data-speed="0.8"></div>
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="{{object.image.url}}" data-speed="0.8"></div>
 		<div class="home_content">
-			<div class="post_category trans_200"><a href="" class="trans_200">{{object.category}}</a></div>
 			<div class="post_title">{{object.title}}</div>
 		</div>
 	</div>
@@ -51,16 +50,10 @@
 						<!-- Post Body -->
 
 						<div class="">
-                            <p class="post_p">{{article.intro }}</p>
-                            <img src="{{article.thumb.url}}" alt="" style="width:100%">
+                            <p class="post_p">{{article.title }}</p>
+                            <img src="{{article.image.url}}" alt="" style="width:100%">
 							<p class="post_p">{{article.body | safe }}</p>
-							<p class="post_p">{{article.body | safe }}</p>
-							<p class="post_p">{{article.v_link | safe }}</p>
-							<p class="post_p">{{article.m_link | safe }}</p>
-							<p class="post_p">{{article.s_link | safe }}</p>
-
-						
-
+							<p class="post_p">{{article.author | safe }}</p>
 							<!-- Post Tags -->
 							<div class="post_tags">
 								<ul>

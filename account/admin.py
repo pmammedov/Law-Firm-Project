@@ -21,11 +21,7 @@ class UserAdmin(admin.ModelAdmin):
     def deactivate(self, queryset):
         queryset.update(is_active=False)
 
-@admin.register(LawyerType)
-class LawyerTypeAdmin(admin.ModelAdmin):
-    list_display = ('name','updated',  )
-    search_fields = ('name',) 
- 
+
 @admin.register(Lawywer)
 class LawywerAdmin(admin.ModelAdmin):
     list_display = ('user','fee','experience', 'organisation', )

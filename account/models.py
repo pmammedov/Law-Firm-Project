@@ -61,26 +61,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     # def get_absolute_url(self):
     #     return reverse('account:edit', args=[self.pk])
 
-class LawyerType(models.Model):
-    name        = models.CharField( max_length=50)    
-    updated     = models.DateField( auto_now=True )
-    timestamp   = models.DateField( auto_now_add=True )
-    slug        = models.SlugField( default=None )
-
-    def __str__(self):
-        return f'{self.name}'
-
-    def __unicode__(self):
-        return f'{self.name}'
 
 class Lawywer(models.Model):
-    user            = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     certification   = models.FileField(upload_to='lawyers/certificates/', max_length=100)
     experience      = models.IntegerField(default=0,verbose_name="years of experience")
-    # cat             = models.ForeignKey(LawyerType, verbose_name="Category",related_name="category", on_delete=models.CASCADE)
     organisation    = models.CharField(max_length=50)
     fee             = models.DecimalField(max_digits=5, decimal_places=2,default=1.00)
-    slug            = models.SlugField( default=None )
     updated         = models.DateField( auto_now=True )
     timestamp       = models.DateField( auto_now_add=True )
     # wins   

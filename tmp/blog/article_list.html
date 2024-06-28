@@ -40,10 +40,10 @@ Blog | LCMS
 									{% for d in object %}
 									<!-- Small Card With Image -->
 									<div class="card card_small_with_image grid-item ">
-										<img class="card-img-top" src="{{d.thumb.url}}" alt="">
+										<img class="card-img-top" src="{{d.image.url}}" alt="">
 										<div class="card-body" >
-											<div class="card-title card-title-small"><a href="{{d.get_absolute_url}}">{{d.title}}</a></div>
-											<small class="post_meta"><a href="{% url 'blog:blog_detail' d.pk %}">{{d.author}}</a><span>{{d.l_updated}}</span></small>
+											<div class="card-title card-title-small"><a href="{}">{{d.title}}</a></div>
+											<small class="post_meta"><a href="{% url 'blog:blog_detail' d.pk %}">{{d.author}}</a><span>{{d.updated}}</span></small>
 										</div>
 									</div>
 									{% endfor %}

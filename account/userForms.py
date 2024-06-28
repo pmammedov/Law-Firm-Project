@@ -51,4 +51,12 @@ class ApointmentForm(forms.ModelForm):
 
 
 #lawyerForm
-
+class LawyerForm(forms.ModelForm):
+    class Meta:
+        model = Lawywer
+        fields = [
+            'user',
+            'certification', 
+            'experience', 
+            'organisation',
+            'fee']

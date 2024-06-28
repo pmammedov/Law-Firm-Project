@@ -1,0 +1,14 @@
+{% extends 'blog_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% comment %} {% block title %} Create Lawyer {% endblock title%} {% endcomment %}
+  <form method="post" enctype="multipart/form-data">
+    <h1>Create Lawyer</h1>
+    <a href="{% url 'account:create_user' %}">Create new user.</a>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Create Lawyer</button>
+  </form>
+{% endblock %}
