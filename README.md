@@ -84,9 +84,6 @@
         <li><strong>Install dependencies:</strong>
             <pre><code>pip install -r requirements.txt</code></pre>
         </li>
-        <li><strong>Apply migrations:</strong>
-            <pre><code>python manage.py migrate</code></pre>
-        </li>
         <li><strong>Create a superuser:</strong>
             <pre><code>python manage.py createsuperuser</code></pre>
         </li>
