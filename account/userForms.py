@@ -21,6 +21,25 @@ class SignUpForm(UserCreationForm):
             'password1', 
             'password2', 
             ]
+        
+class CreateUserForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+    last_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+    email = forms.EmailField(max_length=254, help_text='Enter a valid email address')
+
+    class Meta:
+        model = User
+        fields = [
+            'avatar', 
+            'email', 
+            'first_name', 
+            'phone', 
+            'last_name', 
+            'password1', 
+            'password2', 
+        ]
+        
+        
 
 class UserEditForm(forms.ModelForm):
     class Meta:

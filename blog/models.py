@@ -16,10 +16,12 @@ class Article(models.Model):
         return f"{self.title}"
     
     def get_absolute_url(self):
-        return reverse('blog:post-details')
+        return reverse('blog:post-details', args=[self.id])
+
 
     def snip(self):
         return f'{self.body}'[:180]
+    
     class Meta: 
         ordering = ('-stamp',) 
 

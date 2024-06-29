@@ -36,7 +36,7 @@ Blog | LCMS
 									<img class="card-img-top" src="{{d.image.url}}" alt="">
 									<div class="card-body">
 										<div class="card-title card-title-small"><a
-												href="#">{{d.snip}}</a></div>
+												href="{{d.get_absolute_url}}">{{d.snip}}</a></div>
 										<small class="post_meta"><a
 												href="#">{{d.author}}</a><span>{{d.updated}}</span></small>
 									</div>
@@ -115,7 +115,7 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="#">
+											<a href="{{c.get_absolute_url}}">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">
@@ -141,7 +141,7 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="#">
+											<a href="{{c.get_absolute_url}}">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">
@@ -165,7 +165,7 @@ Blog | LCMS
 										<!-- Sidebar Post -->
 										{% for c in data %}
 										<div class="side_post">
-											<a href="#">
+											<a href="{{c.get_absolute_url}}">
 												<div
 													class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
 													<div class="side_post_image">

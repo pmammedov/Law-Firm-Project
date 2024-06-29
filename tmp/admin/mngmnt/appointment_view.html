@@ -34,7 +34,7 @@
                   <td>
                     <div class="d-flex ">
                     {% if appointment.lawyer.user.avatar %}
-                    <img src="{{appointment.lawyer.user.avatar.url}}" alt="">
+                    <img src="{{appointment.lawyer.user.avatar.url}}" style="object-fit: cover;" alt="">
                     {% endif  %}
                       <div>
                         <h6>{{appointment.lawyer}}</h6>

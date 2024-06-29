@@ -12,7 +12,7 @@ from django.contrib.auth import login , logout
 from django.views.generic import ListView , DetailView ,View,TemplateView, DeleteView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import User
-from .userForms import ApointmentForm, SignUpForm, UserEditForm, LawyerForm
+from .userForms import ApointmentForm, CreateUserForm, SignUpForm, UserEditForm, LawyerForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from django.db.models import Count
@@ -82,19 +82,53 @@ class CreateLawyerView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Create Lawyer'
+        print('burasi calistiiiii')
         return context
 
 class LawyerListView(LoginRequiredMixin, ListView):
     model = Lawywer
     template_name = "admin/mngmnt/lawyer_list_view.html"
+    context_object_name = 'lawyers'
+    user_form = CreateUserForm
+    lawyer_form = LawyerForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        context["non_lawyer_users"] = User.objects.exclude(id__in=Lawywer.objects.values_list('user_id', flat=True))        
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form_user = self.user_form(request.POST, request.FILES)
+        form_lawyer = self.lawyer_form(request.POST, request.FILES)
+        
+        if form_user.is_valid() and form_lawyer.is_valid():
+            print ('forms are valid')
+            user = form_user.save(commit=False)
+            print('user saved with success --> ',user)    
+            user.save()
+            instance  = form_lawyer.save(commit=False)
+            instance.user = user
+            instance.save()
+            print('lawyer saved with success --> ',instance)    
+            messages.success(request, ('lawyer saved with success'))
+        if form_user.errors:
+            messages.error(request, (form_user.errors))  
+            print('user form errors --> ',form_user.errors)
+        if form_lawyer.errors:
+            messages.error(request, (form_lawyer.errors))  
+            print('lawyer form errors --> ',form_lawyer.errors)
+        return redirect('account:lawyer-list')
+
+        
+
+    
 
 class LawyerDetailView(DetailView):
     model = Lawywer
-    form_class  = ApointmentForm
+    form_class = ApointmentForm
     template_name = "admin/mngmnt/lawyer_detail_view.html"
-    context_object_name = 'lawyer'
 
-    def get_context_data(self, *args, **kwargs) :
+    def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['form'] = self.form_class()
         return context
@@ -107,7 +141,7 @@ class LawyerDetailView(DetailView):
             instance.client = client
             instance.lawyer = self.get_object()
             instance.save()
-            messages.success(self.request, ('You have successfully set an appointment with %s' %(self.get_object())))
+            messages.success(self.request, f'You have successfully set an appointment with {self.get_object()}')
         return redirect('account:lawyer-list')
     
 class DeleteLawyerView(DeleteView):

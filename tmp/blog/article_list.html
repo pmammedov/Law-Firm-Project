@@ -13,7 +13,7 @@ Blog | LCMS
         width:100%;
 		display:flex; justify-content:center;align-items:center;
     " >
-		<div class="h3 text-light ">Blog</div>
+		<div class="h3 text-light ">All Blogs</div>
     </div>
 	<!-- Page Content -->
 
@@ -23,7 +23,7 @@ Blog | LCMS
 
 				<!-- Main Content -->
 
-				<div class="col-lg-9">
+				<div class="col-lg-12 mb-5">
 					<div class="main_content">
 
 						<!-- Blog Section - Latest -->
@@ -42,8 +42,8 @@ Blog | LCMS
 									<div class="card card_small_with_image grid-item ">
 										<img class="card-img-top" src="{{d.image.url}}" alt="">
 										<div class="card-body" >
-											<div class="card-title card-title-small"><a href="{}">{{d.title}}</a></div>
-											<small class="post_meta"><a href="{% url 'blog:blog_detail' d.pk %}">{{d.author}}</a><span>{{d.updated}}</span></small>
+											<div class="card-title card-title-small"><a href="{{d.get_absolute_url}}">{{d.title}}</a></div>
+											<small class="post_meta"><a href="{{d.get_absolute_url}}">{{d.author}}</a><span>{{d.updated}}</span></small>
 										</div>
 									</div>
 									{% endfor %}

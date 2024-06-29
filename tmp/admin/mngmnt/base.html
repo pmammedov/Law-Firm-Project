@@ -32,9 +32,9 @@
                     
                     {% for message in messages %}
                     <div role="alert" id="alert"  class="col-12  alert alert-primary alert-dismissible fade show {{ message.tags }} mx-1" style="z-index: 5">
-                      <h5 class="alert-heading text-capitalize">hi {% if user.is_authenticated %}{{user}},{% endif %}</h5>
+                      <h5 class="alert-heading text-capitalize">hi {% if user.is_authenticated %}{{user.first_name}},{% endif %}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      <p>{{ message | safe }} ss</p>
+                      <p>{{ message | safe }}</p>
                     </div>       
                     {% endfor %}
 
@@ -75,6 +75,35 @@
   <!-- django-star-rating   -->
   <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
   <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+  <!-- image show -->
+  <script>
+    document.getElementById('id_avatar').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('previewAvatar');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    document.getElementById('id_certification').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('previewCertification');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    document.getElementById('id_image').onchange = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('previewBlog');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+</script>
   
 </body>
 

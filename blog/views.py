@@ -49,13 +49,41 @@ class BlogListView(ListView):
 
 class BackBlogListView(ListView):
     model = Article
+    form_class = ArticleForm
     template_name = 'admin/mngmnt/appointment_detail.html'
     context_object_name = 'blog'
+    success_url = reverse_lazy('blog:blog_list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['blog'] = Article.objects.all()
+        context['form'] = self.form_class()
         return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+def create_article(request):
+	if request.method == 'POST':
+		form = ArticleForm(request.POST,request.FILES)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.author = request.user		
+			instance.save()		
+		return redirect('blog:blog_list')
+
+def update_article(request, pk):
+	article_object = Article.objects.get(id=pk)	
+	if request.method == 'POST':
+		form = ArticleForm(request.POST,request.FILES, instance=article_object)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.author = request.user		
+			instance.save()		
+		return redirect('blog:blog_list')
+
+
 
 class BlogDetailView(DetailView):
 	model = Article

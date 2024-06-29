@@ -63,7 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Lawywer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user            = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lawyer', blank=True, null=True)
     certification   = models.FileField(upload_to='lawyers/certificates/', max_length=100)
     experience      = models.IntegerField(default=0,verbose_name="years of experience")
     organisation    = models.CharField(max_length=50)

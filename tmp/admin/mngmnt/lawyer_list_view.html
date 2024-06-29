@@ -6,44 +6,146 @@
 
 {% if user.is_authenticated %}
 {% if user.is_superuser %}
-<a href="{% url 'account:create_lawyer' %}" type="button" class="btn btn-primary text-white ">
-    Create Lawyer
-</a>
-{% endif %}
-    <div  class="row ">
-      
-            {% for p in object_list %}
-            <div class="col-4 m-2">
-                {% if p.user.avatar %}
-                <div style="
-                    background-image:url({{p.user.avatar.url}});
-                    width:100%;
-                    height:200px;
-                    background-position:center center;
-                    background-size: 100% auto;
-                    border-radius:10px; 
-                "></div>
-                {% endif  %}
-                <div class="my-2">
-                    <h4 style="
-                    display:flex;
-                    justify-content:space-between"><span>{{p.user.get_full_name}}</span><small>ZMK{{p.fee}}/mo</small></h4>
-                    <!-- <p>{{p.organisation}}</p> -->
-                    <p>{{p.organisation}}</p>
-                    <p>{{p.experience}}yrs experience</p>
-                    <a href="{% url 'account:lawyer-details' p.pk %}" class="btn btn-success btn-md">View Details</a>
-                    <td>
-                        <form action="{% url 'account:delete-lawyer' p.pk %}" method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger border-0" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</button>
-                  
-                        </form>
-                    </td>
+
+<button class="btn btn-primary text-white " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+    aria-controls="offcanvasRight">Create A New Lawyer</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <!-- <h5 class="offcanvas-title" id="offcanvasRightLabel">Create Lawyer</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form method="post" action="{{perman.get_absolute_url}}" enctype="multipart/form-data">
+            <!-- <h4>Create Lawyer</h4> -->
+            <!-- <a href="/account/dashboard/create_user/">Create new user.</a> -->
+
+
+            <!-- add user form  -->
+
+            <div id="div_id_avatar" class="form-group"> <label for="id_avatar" class="">
+                   Choose Avatar
+                </label>
+                <div>
+                    <img id="previewAvatar" style="max-width: 200px; max-height: 200px;" />
+
+                    <input type="file" name="avatar" accept="image/*" class="clearablefileinput form-control-file"
+                        id="id_avatar">
                 </div>
             </div>
-            {% endfor %}
- 
+            <div id="div_id_email" class="form-group"> <label for="id_email" class=" requiredField">
+                    Email address<span class="asteriskField">*</span> </label>
+                <div> <input type="email" name="email" maxlength="254" class="emailinput form-control" required=""
+                        id="id_email"> </div>
+            </div>
+            <div id="div_id_first_name" class="form-group"> <label for="id_first_name" class="">
+                    First name
+                </label>
+                <div> <input type="text" name="first_name" maxlength="30" class="textinput form-control"
+                        id="id_first_name"> </div>
+            </div>
+            <div id="div_id_last_name" class="form-group"> <label for="id_last_name" class="">
+                    Last name
+                </label>
+                <div> <input type="text" name="last_name" maxlength="30" class="textinput form-control"
+                        id="id_last_name"> </div>
+            </div>
+
+            <div id="div_id_phone" class="form-group"> <label for="id_phone" class="">
+                    Phone
+                </label>
+                <div> <input type="tel" name="phone" maxlength="128" placeholder="+4464982363"
+                        class="regionalphonenumberwidget form-control" id="id_phone"> </div>
+            </div>
+
+            <div id="div_id_password1" class="form-group"> <label for="id_password1" class="">
+                    Password (asigned default password)
+                </label>
+                <div> <input type="password" name="password1" value="l@Fms12!sys" maxlength="30" readonly
+                        class="textinput form-control" placeholder="asigned default password" id="id_password1"> </div>
+            </div>
+            <div id="div_id_password2" class="form-group"> <label for="id_password2" class="">
+                    Confırm Password (asigned default password)
+                </label>
+                <div> <input type="password" name="password2" value="l@Fms12!sys" readonly
+                        placeholder="asigned default password" maxlength="30" class="textinput form-control"
+                        id="id_password2"> </div>
+            </div>
+            {% csrf_token %}
+
+            <!-- add lawyer form  -->
+            <input type="hidden" name="user" value="1">
+            <img id="previewCertification" style="max-width: 200px; max-height: 200px;" />
+
+            <div id="div_id_certification" class="form-group"> <label for="id_certification" class=" requiredField">
+                    Certification<span class="asteriskField">*</span> </label>
+                <div> <input type="file" name="certification" class="clearablefileinput form-control-file" required=""
+                        id="id_certification"> </div>
+            </div>
+            <div id="div_id_experience" class="form-group"> <label for="id_experience" class=" requiredField">
+                    Years of experience<span class="asteriskField">*</span> </label>
+                <div> <input type="number" name="experience" min="0" value="1" class="numberinput form-control"
+                        required="" id="id_experience"> </div>
+            </div>
+            <div id="div_id_organisation" class="form-group"> <label for="id_organisation" class=" requiredField">
+                    Organisation<span class="asteriskField">*</span> </label>
+                <div> <input type="text" name="organisation" maxlength="50" class="textinput form-control" required=""
+                        id="id_organisation"> </div>
+            </div>
+            <div id="div_id_fee" class="form-group"> <label for="id_fee" class=" requiredField">
+                    Fee ($) </label>
+                <div> <input type="number" name="fee" value="40.0" step="0.01" class="numberinput form-control"
+                        required="" id="id_fee"> </div>
+            </div>
+
+            <!-- end lawyer form   -->
+            <button type="submit" class="btn btn-success">Create Lawyer</button>
+        </form>
+
     </div>
 
-    {% endif %}
+    <!-- end user form  -->
+
+
+
+</div>
+</div>
+
+<!-- user form -->
+{% endif %}
+
+
+
+<div class="d-flex flex-wrap gap-3">
+    {% for p in lawyers %}
+
+    <div class="card" style="width: 18rem;">
+        {% if p.user.avatar %}
+        <img src={{p.user.avatar.url}} style="max-height:200px; object-fit: cover; ;" class="card-img-top"
+            alt={{p.user.get_full_name}}>
+        {% endif %}
+
+        <div class="card-body p-2 pt-3">
+            <h5 class="card-title p-0 m-0">{{p.user.get_full_name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item p-2"> <span class="fw-bold">-> {{p.organisation}} </span>Organization</li>
+            <li class="list-group-item p-2"><span class="fw-bold">-> {{p.experience}} </span> years of experience</li>
+        </ul>
+        <div class="card-body">
+            <!-- <a href="{% url 'account:lawyer-details' p.pk %}" class="card-link">View Detail and Make Appointment</a> -->
+            <a href="{% url 'account:lawyer-details' p.pk %}" class="btn btn-success btn-md">View Details</a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger border-0"
+                onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</button>
+            <!-- <a href="#" class="card-link">Another link</a> -->
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+{% endif %}
 {% endblock content %}
