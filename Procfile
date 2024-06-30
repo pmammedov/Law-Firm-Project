@@ -1,0 +1,1 @@
+web gunicorn Lfirm.wsgi:application --log-file -

@@ -13,6 +13,7 @@ crispy-bootstrap4==2024.1
 cryptography==42.0.7
 daphne==4.1.2
 distlib==0.3.8
+dj-database-url==2.2.0
 Django==5.0.3
 django-braces==1.15.0
 django-channels==0.7.0
@@ -21,6 +22,7 @@ django-countries==7.6.1
 django-crispy-forms==2.1
 django-crontab==0.7.1
 django-filter==24.1
+django-heroku==0.3.1
 django-model-utils==4.5.1
 django-phonenumber-field==7.3.0
 django-redis==5.4.0
@@ -29,6 +31,7 @@ django-star-ratings==0.9.2
 djangorestframework==3.15.0
 djangorestframework-simplejwt==5.3.1
 filelock==3.13.1
+gunicorn==22.0.0
 hyperlink==21.0.0
 idna==3.7
 incremental==22.10.0
@@ -42,6 +45,7 @@ phonenumberslite==8.13.34
 pillow==10.2.0
 pipenv==2023.11.15
 platformdirs==4.1.0
+psycopg2==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycairo==1.26.0
