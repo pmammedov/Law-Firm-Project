@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>LCMS Administration</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css' %}"> -->
 
   <link rel="stylesheet" href="{% static 'admin/css/vertical/style.css' %}">
   <!-- endinject -->
@@ -29,7 +29,6 @@
               <div class="home-tab">
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-                    
                     {% for message in messages %}
                     <div role="alert" id="alert"  class="col-12  alert alert-primary alert-dismissible fade show {{ message.tags }} mx-1" style="z-index: 5">
                       <h5 class="alert-heading text-capitalize">hi {% if user.is_authenticated %}{{user.first_name}},{% endif %}</h5>
