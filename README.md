@@ -112,5 +112,6 @@
     </ol>
     <h2>Contact</h2>
     <p><a href="mailto:pmammedov@gmail.com">MailToMe</a></p>
+    <p><a href="https://github.com/users/pmammedov/projects/2">Kanban</a></p>
     <p>Thank you for visiting! If you find this project helpful, please give it a star 🌟.</p>
 </body>
